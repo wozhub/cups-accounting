@@ -3,7 +3,7 @@
 from cupsAccounting.utils import objetoBase, validarUsuario
 
 
-class Job(objetoBase):
+class Job(objetoBase, Logger):
     def __init__(self, c, jid):
         self.jid = jid
         self.c = c  # referencia al servidor

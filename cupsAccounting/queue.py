@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 
 from cupsAccounting.job import Job
+from cupsAccounting.utiles import objetoBase
+from cupsAccounting.logger import Logger
 
 
-class Queue(object):
+class Queue(objetoBase, Logger):
 
     def __init__(self, c, name):
         self.c = c

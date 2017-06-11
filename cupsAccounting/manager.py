@@ -6,11 +6,7 @@ from cupsAccounting.queue import Queue
 from cupsAccounting.logger import Logger
 
 
-class Base(object):
-    pass
-
-
-class Manager(Base, Logger):
+class Manager(objetoBase, Logger):
 
     def __init__(self, name, printer):
         self.name = name
