@@ -5,9 +5,15 @@ inspired by accsnmp
 
 ### Requerimientos a nivel SO
 
-libcups2-dev libsnmp-dev
+apt-get install libcups2-dev libsnmp-dev
+apt-get install python3 python3-pip virtualenv
 
 ### Virtual Environment
+
+virtualenv --python=$(which python3) venv
+source venv/bin/activate
+pip install pycups easysnmp
+
 
 ## Configuracion
 

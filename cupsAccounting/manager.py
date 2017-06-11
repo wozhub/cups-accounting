@@ -13,8 +13,7 @@ class Base(object):
 class Manager(Base, Logger):
 
     def __init__(self, name, printer):
-        self.logger.debug('Creando %s' % name)
-        self.name = "test"
+        self.name = name
         self.c = Connection()
         self.p = printer
         self._initQueues()
