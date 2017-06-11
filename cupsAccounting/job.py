@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from cupsAccounting.utils import objetoBase, validarUsuario
-
+from cupsAccounting.logger import Logger
 
 class Job(objetoBase, Logger):
     def __init__(self, c, jid):
