@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from cupsAccounting.job import Job
-from cupsAccounting.utiles import objetoBase
+from cupsAccounting.utils import objetoBase
 from cupsAccounting.logger import Logger
 
 
