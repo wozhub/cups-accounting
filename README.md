@@ -1,20 +1,22 @@
-cups-accounting
-===============
+# cups-accounting
 
 inspired by accsnmp
+## Instalacion
 
+### Requerimientos a nivel SO
 
-servidor de impresiones
-    base de datos: donde se registran las impresiones
+libcups2-dev libsnmp-dev
 
-    proceso de recepcion de trabajos:
-    (entrada -> espera)
+### Virtual Environment
 
-    proceso de impresion de trabajos:
-    (espera -> salida)
+## Configuracion
 
-    manejo de alertas/notificaciones 
+https://www.papercut.com/kb/Main/UnknownAndWithheldUserInCUPS
 
-    autenticacion de usuarios
+## TODO
 
-    relevo de informacion de las impresoras
+- [ ] Funcionamiento Básico
+- [ ] Documentar Instalación
+- [ ] Documentar Configuración
+- [ ] Agregar DB Backend (sqlalchemy?)
+- [ ] Agregar Alertas (jinja y google-smtp?)

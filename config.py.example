@@ -1,0 +1,6 @@
+#!/usr/bin/env python
+
+from cupsAccounting.printer import Printer
+
+p_name = 'nombre'
+p = Printer()
