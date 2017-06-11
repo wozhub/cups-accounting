@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 
-from cups import Connection
-
 from cupsAccounting.queue import Queue
 from cupsAccounting.logger import Logger
 from cupsAccounting.utils import objetoBase
+
+from cups import Connection
+from time import sleep
 
 
 class Manager(objetoBase, Logger):
@@ -39,7 +40,17 @@ class Manager(objetoBase, Logger):
                 break
 
             j.mover(self.q['salida'])
-            break
+            sleep(1)
+
+            antes = self.p.contador
+            while not self.p.idle:
+                sleep(1)
+            despues = self.p.contador
+            print(despues-antes)
+
+            if not self.q['salida'].empty:
+                self.logger.info('Paso algo raro')
+                break
 
     def status(self):
         q_brief = ""
