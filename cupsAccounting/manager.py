@@ -4,7 +4,7 @@ from cups import Connection
 
 from cupsAccounting.queue import Queue
 from cupsAccounting.logger import Logger
-from cupsAccounting.utils import ObjetoBase
+from cupsAccounting.utils import objetoBase
 
 
 class Manager(objetoBase, Logger):
