@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from cupsAccounting.printer import Printer
+from cupsAccounting.printers.printer import Printer
 
 
 from easysnmp import Session
