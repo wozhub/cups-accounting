@@ -24,6 +24,7 @@ class Manager(objetoBase, Logger):
         self.q['salida'] = Queue(self.c, '%s-salida' % self.name)
 
     def procesar(self):
+
         self.logger.info('Procesando %s' % self.q['entrada'].name)
         for j in self.q['entrada'].jobs:
             if j.validar():
@@ -42,14 +43,15 @@ class Manager(objetoBase, Logger):
                 self.logger.info('La impresora no esta lista')
                 break
 
-            j.mover(self.q['salida'])
-            sleep(1)
-
             antes = self.p.contador
+            j.mover(self.q['salida'])
+
+            sleep(1)  # Hago una pausa para permitir que arranque la impresora
             while not self.p.idle:
-                sleep(1)
+                sleep(1)  # Espero a que termine
+
             despues = self.p.contador
-            print(despues-antes)
+            self.logger.warn('%d' % despues-antes)
 
             if not self.q['salida'].empty:
                 self.logger.info('Paso algo raro')
