@@ -50,8 +50,8 @@ class Manager(objetoBase, Logger):
             while not self.p.idle:
                 sleep(1)  # Espero a que termine
 
-            despues = self.p.contador
-            self.logger.warn('%d' % despues-antes)
+            paginas = self.p.contador - antes
+            self.logger.warn('%d' % paginas)
 
             if not self.q['salida'].empty:
                 self.logger.info('Paso algo raro')
