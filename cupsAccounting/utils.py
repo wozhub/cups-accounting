@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
-from pwd import getpwnam
+from cupsAccounting.logger import Logger
 
+from pwd import getpwnam
 
 u_black = ['Administrador', 'administrador', 'root', 'admin']
 u_white = ['marie']
@@ -15,22 +16,17 @@ def validarUsuario(user):
     """Verifica que el usuario exista en LDAP"""
 
     if user in u_black:
-        logging.error('El usuario [%s] esta en la lista nok', user)
-        return False
+        return 1
 
     if user in u_white:
-        logging.debug('El usuario [%s] se verifico correctamente', user)
-        return True
+        return 0
 
     try:
-        if getpwnam(user):
-            logging.debug('El usuario [%s] se verifico correctamente', user)
-            return True
-        else:
-            logging.error('El usuario [%s] no pudo verificarse', user)
-            return False
-    except:
-        logging.error('El usuario [%s] no pudo verificarse', user)
+        getpwnam(user)
         return 0
+    except:
+        return 2
+
+    return False
 
 

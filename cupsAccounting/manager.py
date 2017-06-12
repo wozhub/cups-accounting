@@ -26,7 +26,10 @@ class Manager(objetoBase, Logger):
     def procesar(self):
         self.logger.info('Procesando %s' % self.q['entrada'].name)
         for j in self.q['entrada'].jobs:
-            j.mover(self.q['espera'])
+            if j.validar():
+                j.mover(self.q['espera'])
+            else:
+                j.cancelar()
 
         self.logger.info('Procesando %s' % self.q['espera'].name)
         for j in self.q['espera'].jobs:
