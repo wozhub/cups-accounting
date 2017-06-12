@@ -4,3 +4,15 @@ from cupsAccounting.printer.printer import Printer
 
 p_name = 'nombre'
 p = Printer()
+
+mail_conf = {
+    'dominio': '@piruloinc.com',
+    'excluidos': ['salon', ],
+    'aliases': {'eljefe': 'pirulo@piruloinc.com'},
+    'admins': ['mcgyver'],
+    'smtp_user': 'usuario@gmail.com',
+    'smpt_pass': 'clave'
+}
+
+u_black = ['Administrador', 'administrador', 'root', 'admin']
+u_white = ['marie']

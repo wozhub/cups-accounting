@@ -2,7 +2,7 @@
 
 from cupsAccounting.queue import Queue
 from cupsAccounting.logger import Logger
-from cupsAccounting.utils import objetoBase
+from cupsAccounting.utils import objetoBase, enviarMail
 
 from cups import Connection
 from time import sleep
@@ -10,10 +10,11 @@ from time import sleep
 
 class Manager(objetoBase, Logger):
 
-    def __init__(self, name, printer):
+    def __init__(self, name, printer, mail_config):
         self.name = name
         self.c = Connection()
         self.p = printer
+        self.m = mail_config
         self._initQueues()
 
     def _initQueues(self):
@@ -23,15 +24,20 @@ class Manager(objetoBase, Logger):
         self.q['espera'] = Queue(self.c, '%s-espera' % self.name)
         self.q['salida'] = Queue(self.c, '%s-salida' % self.name)
 
-    def procesar(self):
-
+    def procesarEntrada(self):
         self.logger.info('Procesando %s' % self.q['entrada'].name)
         for j in self.q['entrada'].jobs:
             if j.validar():
                 j.mover(self.q['espera'])
+                subject = "Impresion Recibida: %s" % j.nombre
+                enviarMail(j.usuario+'@agro.uba.ar', subject, self.m)
             else:
                 j.cancelar()
+                subject = "Impresion Cancelada: %s" % j.nombre
+                for admin in self.m['admins']:
+                    enviarMail(admin, subject, self.m)
 
+    def procesarSalida(self):
         self.logger.info('Procesando %s' % self.q['espera'].name)
         for j in self.q['espera'].jobs:
 
@@ -45,6 +51,8 @@ class Manager(objetoBase, Logger):
 
             antes = self.p.contador
             j.mover(self.q['salida'])
+            subject = "Impresion Iniciando: %s" % j.nombre
+            enviarMail(j.usuario+'@agro.uba.ar', subject, self.m)
 
             sleep(1)  # Hago una pausa para permitir que arranque la impresora
             while not self.p.idle:
@@ -52,6 +60,9 @@ class Manager(objetoBase, Logger):
 
             paginas = self.p.contador - antes
             self.logger.warn('%d' % paginas)
+
+            subject = "Impresion Finalizada: %s" % j.nombre
+            enviarMail(j.usuario+'@agro.uba.ar', subject, self.m)
 
             if not self.q['salida'].empty:
                 self.logger.info('Paso algo raro')

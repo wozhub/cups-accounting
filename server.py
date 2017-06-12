@@ -1,16 +1,25 @@
 #!/usr/bin/env python
 
-import cupsAccounting.logger
+from config import p, p_name, conf_mail
+
 from cupsAccounting.manager import Manager
 
-from config import p, p_name
-
+from os import system
+from time import sleep
 
 def main():
-    m = Manager(p_name, p)
-    print(m.status())
-    m.procesar()
-    print(m.status())
+    m = Manager(p_name, p, conf_mail)
+
+    while True:
+        system('clear')
+        print(m.status())
+        sleep(1)
+        m.procesarEntrada()
+        system('clear')
+        print(m.status())
+        sleep(1)
+        m.procesarSalida()
+
 
 
 if __name__ == '__main__':
