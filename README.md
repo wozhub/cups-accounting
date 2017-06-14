@@ -5,18 +5,29 @@ inspired by accsnmp
 
 ### Requerimientos a nivel SO
 
-apt-get install libcups2-dev libsnmp-dev snmp
-apt-get install python3 python3-pip virtualenv
+```bash
+sudo apt-get install python3 python3-pip virtualenv  # Para ejecutar los scripts
+sudo apt-get install libcups2-dev  # Lo requiere pycups
+sudo apt-get install libsnmp-dev  # Lo requiere easysnmp
+sudo apt-get install snmp  # Para evitar unos warnings por la ausencia de MIBs
+sudo apt-get install git  # Para clonar este repositorio
+```
 
-### Virtual Environment
+### Código y Virtual Environment
 
+```bash
+git clone https://github.com/dvinazza/cups-accounting.git
+cd cups-accounting
 virtualenv --python=$(which python3) venv
 source venv/bin/activate
 pip install pycups easysnmp
+```
 
 ## Configuracion
 
 ### CUPS
+
+El script necesita acceder a los detalles de los jobs en el CUPS
 
 https://www.papercut.com/kb/Main/UnknownAndWithheldUserInCUPS
 
@@ -25,6 +36,6 @@ https://www.papercut.com/kb/Main/UnknownAndWithheldUserInCUPS
 - [x] Funcionamiento Básico (etapas de la impresión y autenticación)
 - [x] Agregar Alertas (jinja y google-smtp?)
 - [ ] Separar Alertas y agregar contexto (class MailEngine o algo así?)
-- [ ] Documentar Instalación
+- [x] Documentar Instalación
 - [ ] Documentar Configuración
 - [ ] Agregar DB Backend (sqlalchemy?)
