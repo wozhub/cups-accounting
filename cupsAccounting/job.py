@@ -10,6 +10,7 @@ class Job(objetoBase, Logger):
         self.c = c  # referencia al servidor
 
         self.usuario = self.attr['job-originating-user-name'].lower()
+        self.ip = self.attr['job-originating-host-name']
         self.nombre = self.attr['job-name'].lower()
 
         if 'smbprn' in self.nombre:
@@ -44,8 +45,8 @@ class Job(objetoBase, Logger):
         self.c.cancelJob(self.jid)
 
     def __repr__(self):
-        return """{clase} {jid}: {user} "{nombre}" """.format(
+        return """{clase} {jid}: {user}@{ip} "{nombre}" """.format(
             clase=self.__class__.__name__,
             jid=self.jid,
-            user=self.usuario,
+            user=self.usuario, ip=self.ip,
             nombre=self.nombre)
