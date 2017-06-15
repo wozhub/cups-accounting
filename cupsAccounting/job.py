@@ -40,7 +40,7 @@ class Job(objetoBase, Logger):
 
     def cancelar(self):
         self.logger.info(
-            '%d: Cancelando!' % (self.jid,))
+            '%d: Cancelando! (%s)' % (self.jid, self))
         self.c.cancelJob(self.jid)
 
     def __repr__(self):

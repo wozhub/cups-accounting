@@ -25,7 +25,7 @@ class Manager(objetoBase, Logger):
         self.q['salida'] = Queue(self.c, '%s-salida' % self.name)
 
     def procesarEntrada(self):
-        self.logger.info('Procesando %s' % self.q['entrada'].name)
+        self.logger.debug('Procesando %s' % self.q['entrada'].name)
         for j in self.q['entrada'].jobs:
             if j.validar():
                 j.mover(self.q['espera'])
@@ -38,7 +38,7 @@ class Manager(objetoBase, Logger):
                     enviarMail(admin, subject, self.m)
 
     def procesarSalida(self):
-        self.logger.info('Procesando %s' % self.q['espera'].name)
+        self.logger.debug('Procesando %s' % self.q['espera'].name)
         for j in self.q['espera'].jobs:
 
             if not self.q['salida'].empty:
