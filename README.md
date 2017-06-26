@@ -38,4 +38,5 @@ https://www.papercut.com/kb/Main/UnknownAndWithheldUserInCUPS
 - [ ] Separar Alertas y agregar contexto (class MailEngine o algo así?)
 - [x] Documentar Instalación
 - [ ] Documentar Configuración
-- [ ] Agregar DB Backend (sqlalchemy?)
+- [x] Agregar DB Backend (sqlalchemy?)
+- [ ] db: Registrar el nombre de la impresora en la Impresion?
