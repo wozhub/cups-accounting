@@ -32,12 +32,12 @@ class Database(objetoBase, Logger):
 
         return self._session
 
-    def getUser(self, name):
-        u = self.session.query(Usuario).filter_by(name=name).first()
+    def getUsuario(self, u_name):
+        u = self.session.query(Usuario).filter_by(name=u_name).first()
         if u:
             return u
         else:
-            u = Usuario(name=name)
+            u = Usuario(name=u_name)
             self.session.add(u)
             try:
                 self.session.commit()
@@ -46,8 +46,39 @@ class Database(objetoBase, Logger):
                 print(e)
                 self.session.rollback()
 
+    def getResponsable(self, r_name):
+        r = self.session.query(Responsable).filter_by(name=r_name).first()
+        if r:
+            return r
+        else:
+            r = Responsable(name=r_name)
+            self.session.add(r)
+            try:
+                self.session.commit()
+                return r
+            except Exception as e:
+                print(e)
+                self.session.rollback()
+
+    def setUsuarioResponsable(self, u_name, r_name):
+        usuario = self.getUsuario(u_name)
+        responsable = self.getResponsable(r_name)
+        usuario.responsable_uid = responsable.uid
+        try:
+            self.session.commit()
+        except Exception as e:
+            self.logger.error(e)
+            self.session.rollback()
+
+        # En caso de que haya impresiones suyas sin responsable
+        for i in self.session.query(Impresion)\
+                .filter_by(usuario=usuario)\
+                .filter_by(responsable=None):
+            i.responsable = responsable
+        self.session.commit()
+
     def job2db(self, job):
-        usuario = self.getUser(job.usuario)
+        usuario = self.getUsuario(job.usuario)
         i = Impresion()
         i.name = job.nombre
         i.usuario = usuario

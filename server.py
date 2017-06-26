@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
-from config import p, p_name, conf_mail, conf_db
-
-from cupsAccounting.manager import Manager
-
 from os import system
 from time import sleep
+
+
+from config import p, p_name, conf_mail, conf_db
+from cupsAccounting.manager import Manager
 
 
 def main():
