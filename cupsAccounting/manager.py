@@ -4,17 +4,20 @@ from cupsAccounting.queue import Queue
 from cupsAccounting.logger import Logger
 from cupsAccounting.utils import objetoBase, enviarMail
 
+from cupsAccounting.database import Database
+
 from cups import Connection
 from time import sleep
 
 
 class Manager(objetoBase, Logger):
 
-    def __init__(self, name, printer, mail_config):
+    def __init__(self, name, printer, mail_config, db_config):
         self.name = name
         self.c = Connection()
         self.p = printer
         self.m = mail_config
+        self.db = Database(db_config['db_url'])
         self._initQueues()
 
     def _initQueues(self):
@@ -58,11 +61,12 @@ class Manager(objetoBase, Logger):
             while not self.p.idle:
                 sleep(1)  # Espero a que termine
 
-            paginas = self.p.contador - antes
-            self.logger.warn('%d' % paginas)
+            j.paginas = self.p.contador - antes
+            self.logger.warn('%d' % j.paginas)
 
             subject = "Impresion Finalizada: %s" % j.nombre
             enviarMail(j.usuario+'@agro.uba.ar', subject, self.m)
+            self.db.job2db(j)
 
             if not self.q['salida'].empty:
                 self.logger.info('Paso algo raro')

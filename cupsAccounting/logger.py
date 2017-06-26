@@ -15,6 +15,6 @@ log_fmt = "%(asctime)s | %(levelname)s | %(module)s.%(funcName)s | %(message)s"
 
 logging.basicConfig(
   level=logging.INFO,
-  filename='/tmp/cups-accounting.log', filemode='w',
+  filename='/tmp/cups-accounting.log', filemode='a',
   format=log_fmt,
   datefmt="%Y-%m-%d %H:%M:%S")

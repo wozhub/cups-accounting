@@ -14,5 +14,9 @@ mail_conf = {
     'smpt_pass': 'clave'
 }
 
+conf_db = {
+    'db_url': 'sqlite://'  # Store in :memory: for testing
+}
+
 u_black = ['Administrador', 'administrador', 'root', 'admin']
 u_white = ['marie']

@@ -5,14 +5,16 @@ from cupsAccounting.logger import Logger
 
 
 class Job(objetoBase, Logger):
+    paginas = 1  # Por el solo hecho de existir
+
     def __init__(self, c, jid):
         self.jid = jid
         self.c = c  # referencia al servidor
 
         self.usuario = self.attr['job-originating-user-name'].lower()
         self.ip = self.attr['job-originating-host-name']
-        self.nombre = self.attr['job-name'].lower()
 
+        self.nombre = self.attr['job-name'].lower()
         if 'smbprn' in self.nombre:
             self.nombre = self.nombre.split(' ', 1)[1]
 
