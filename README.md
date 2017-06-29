@@ -1,6 +1,7 @@
 # cups-accounting
 
 inspired by accsnmp
+
 ## Instalacion
 
 ### Requerimientos a nivel SO
@@ -36,11 +37,13 @@ https://www.papercut.com/kb/Main/UnknownAndWithheldUserInCUPS
 
 - [x] Funcionamiento Básico (etapas de la impresión y autenticación)
 - [x] Agregar Alertas (jinja y google-smtp?)
-- [ ] Separar Alertas y agregar contexto (class MailEngine o algo así?)
+- [ ] Alertas: Separar en un objeto aparte y agregar contexto (class MailEngine o algo así?)
+- [ ] Alertas: Briefing del job en cuestión
 - [ ] Homogeneizar/Simplificar la representación de cada objeto en __repr__
-- [x] Documentar Instalación
-- [ ] Documentar Configuración
-- [ ] Configurar mediante YAML
-- [x] Agregar DB Backend (sqlalchemy?)
+- [x] Documentación: Instalación
+- [ ] Documentación: Configuración
+- [ ] Configuración: Documentar
+- [ ] Configuración: Utilizar YAML en lugar de un script de python
+- [x] db: Agregar DB Backend (sqlalchemy)
 - [x] db: Registrar el nombre de la impresora en la Impresion?
 - [ ] db: Utilizar polymorf para no tener que mapear a mano las propiedades de cups.job a db.job?

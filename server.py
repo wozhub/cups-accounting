@@ -21,7 +21,7 @@ def main():
         sleep(1)
         m.procesarSalida()
 
-        print(m.db.status())
+        m.db.status()
 
 
 if __name__ == '__main__':
