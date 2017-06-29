@@ -22,6 +22,7 @@ class Database(objetoBase, Logger):
     def __init__(self, engine_url):
         self.logger.info("Creando %s" % (engine_url))
         self.engine = create_engine(engine_url)
+        self.base.metadata.create_all(self.engine)
 
     @property
     def session(self):
@@ -29,7 +30,6 @@ class Database(objetoBase, Logger):
             builder = sessionmaker()
             builder.configure(bind=self.engine)
             self._session = builder()
-            Base.metadata.create_all(self.engine)
 
         return self._session
 
@@ -74,7 +74,6 @@ class Database(objetoBase, Logger):
             except Exception as e:
                 print(e)
                 self.session.rollback()
-
 
     def setUsuarioResponsable(self, u_name, r_name):
         usuario = self.getUsuario(u_name)
