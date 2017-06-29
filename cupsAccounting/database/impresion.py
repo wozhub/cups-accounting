@@ -23,13 +23,11 @@ class Impresion(Base):
                          nullable=False)
     usuario = relationship("Usuario", back_populates="impresiones")
 
-
-
-    responsable_uid = Column(Integer,
-                             ForeignKey('responsable.uid'),
-                             # nullable=False
-                             )
+    responsable_uid = Column(Integer, ForeignKey('responsable.uid'))
     responsable = relationship("Responsable", back_populates="impresiones")
+
+    impresora_id = Column(Integer, ForeignKey('impresora.impresora_id'))
+    impresora = relationship("Impresora", back_populates="impresiones")
 
     def __repr__(self):
         return "Impresion (%d): %s" % (self.iid or -1, self.name)
