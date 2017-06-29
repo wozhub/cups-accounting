@@ -13,7 +13,7 @@ class Impresion(Base):
     __tablename__ = 'impresion'
 
     iid = Column(Integer, primary_key=True)
-    name = Column(String)
+    nombre= Column(String)
     paginas = Column(Integer, nullable=False)
     fecha = Column(DateTime, default=datetime.now)
     ip = Column(String, nullable=False)
