@@ -96,7 +96,7 @@ class Database(objetoBase, Logger):
         usuario = self.getUsuario(job.usuario)
         impresora = self.getImpresora(job.impresora)
         i = Impresion()
-        i.name = job.nombre
+        i.nombre = job.nombre
         i.usuario = usuario
         i.ip = job.ip
         i.paginas = job.paginas
