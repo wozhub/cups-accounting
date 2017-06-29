@@ -30,4 +30,8 @@ class Impresion(Base):
     impresora = relationship("Impresora", back_populates="impresiones")
 
     def __repr__(self):
-        return "Impresion (%d): %s" % (self.iid or -1, self.name)
+        #return "Impresion (%d): %s" % (self.iid or -1, self.name)
+        return """{clase} {jid}: {user}@{ip} "{nombre}"@{impresora} """.format(
+            clase=self.__class__.__name__,
+            jid=self.iid or -1, user=self.usuario, ip=self.ip,
+            nombre=self.nombre, impresora=self.impresora)
