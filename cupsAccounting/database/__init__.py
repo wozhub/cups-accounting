@@ -109,3 +109,7 @@ class Database(objetoBase, Logger):
         except Exception as e:
             self.logger.error(e)
             self.session.rollback()
+
+    def status(self):
+        for i in self.session.query(Impresion).limit(5).all():
+            print(i)

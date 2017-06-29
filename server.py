@@ -21,6 +21,8 @@ def main():
         sleep(1)
         m.procesarSalida()
 
+        print(m.db.status())
+
 
 if __name__ == '__main__':
     main()
