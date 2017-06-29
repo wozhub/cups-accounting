@@ -42,8 +42,11 @@ https://www.papercut.com/kb/Main/UnknownAndWithheldUserInCUPS
 - [ ] Homogeneizar/Simplificar la representación de cada objeto en __repr__
 - [x] Documentación: Instalación
 - [ ] Documentación: Configuración
+- [ ] Documentación: Como extender a otra impresora
 - [ ] Configuración: Documentar
 - [ ] Configuración: Utilizar YAML en lugar de un script de python
+- [ ] Configuración: Separar la config del Manager de la impresora (mismo manager puede admin varias impr)
+- [x] Ejecución: Parametrizar impresora
 - [x] db: Agregar DB Backend (sqlalchemy)
 - [x] db: Registrar el nombre de la impresora en la Impresion?
 - [ ] db: Utilizar polymorf para no tener que mapear a mano las propiedades de cups.job a db.job?

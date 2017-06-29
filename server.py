@@ -3,13 +3,28 @@
 from os import system
 from time import sleep
 
-
-from config import p, p_name, conf_mail, conf_db
+from cupsAccounting.printers import loadPrinter
+from cupsAccounting.config import Config
 from cupsAccounting.manager import Manager
+
+from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
 
 def main():
-    m = Manager(p_name, p, conf_mail, conf_db)
+    parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
+    parser.add_argument("--nombre", default='test',
+                        help='Nombre de la impresora a administrar en CUPS.')
+    parser.add_argument("--marca", default='generica',
+                        help='Nombre de la impresora a administrar en CUPS.')
+    parser.add_argument("--modelo", default='generico',
+                        help='Nombre de la impresora a administrar en CUPS.')
+    parser.add_argument("--ip", default='127.0.0.1',
+                        help='Nombre de la impresora a administrar en CUPS.')
+    args = parser.parse_args()
+
+    c = Config('config.yaml')  # Configuracion
+    p = loadPrinter(args)
+    m = Manager(c, p)
 
     while True:
         system('clear')
@@ -22,6 +37,7 @@ def main():
         m.procesarSalida()
 
         m.db.status()
+        sleep(1)
 
 
 if __name__ == '__main__':

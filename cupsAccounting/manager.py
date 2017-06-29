@@ -12,12 +12,13 @@ from time import sleep
 
 class Manager(objetoBase, Logger):
 
-    def __init__(self, name, printer, mail_config, db_config):
-        self.name = name
+    def __init__(self, config, printer):
+        self.config = config
+        # self.name =
         self.c = Connection()
         self.p = printer
-        self.m = mail_config
-        self.db = Database(db_config['db_url'])
+        self.m = config.config.mail
+        self.db = Database(config.config.db['db_url'])
         self._initQueues()
 
     def _initQueues(self):

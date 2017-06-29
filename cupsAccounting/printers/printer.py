@@ -7,6 +7,8 @@ from random import randint
 
 
 class Printer(objetoBase, Logger):
+    marca = 'generica'
+
     def __init__(self, nombre='default'):
         self.nombre = nombre
         self._contador = 0

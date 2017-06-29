@@ -1,0 +1,23 @@
+mail:
+    dominio: "@piruloinc.com"
+    excluidos: 
+        - salon
+    aliases:
+        - eljefe: "pirulo@piruloinc.com"
+    admins:
+        - mcgyver
+    smtp_user: "usuario@gmail.com"
+    smpt_pass: clave
+
+db:
+    db_url: sqlite://
+
+user:
+    blacklist:
+        - Administrador
+        - administrador
+        - root
+        - admin
+
+    whitelist:
+        - marie

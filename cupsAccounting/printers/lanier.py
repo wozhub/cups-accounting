@@ -7,8 +7,10 @@ from easysnmp import Session
 
 
 class LanierMp3352(Printer):
-    def __init__(self, ip):
-        self.ip = ip
+    marca = 'lanier'
+
+    def __init__(self, config):
+        self.ip = config['ip']
         self.oid_estado = "iso.3.6.1.2.1.43.17.6.1.2.1.3"
         self.oid_contador = 'iso.3.6.1.2.1.43.10.2.1.4.1.1'
         # oid_contador = 'iso.3.6.1.2.1.43.10.2.1.5.1.1'
