@@ -55,8 +55,7 @@ class Job(objetoBase, Logger):
         self.c.cancelJob(self.jid)
 
     def __repr__(self):
-        return """{clase} {jid}: {user}@{ip} "{nombre}" """.format(
+        return """{clase} {jid}: {user}@{ip} "{nombre}"@{impresora} """.format(
             clase=self.__class__.__name__,
-            jid=self.jid,
-            user=self.usuario, ip=self.ip,
-            nombre=self.nombre)
+            jid=self.jid, user=self.usuario, ip=self.ip, nombre=self.nombre,
+            impresora=self.impresora)
