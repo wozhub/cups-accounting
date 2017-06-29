@@ -21,6 +21,7 @@ cd cups-accounting
 virtualenv --python=$(which python3) venv
 source venv/bin/activate
 pip install pycups easysnmp
+pip install sqlalchemy  # db backend
 ```
 
 ## Configuracion
@@ -36,7 +37,10 @@ https://www.papercut.com/kb/Main/UnknownAndWithheldUserInCUPS
 - [x] Funcionamiento Básico (etapas de la impresión y autenticación)
 - [x] Agregar Alertas (jinja y google-smtp?)
 - [ ] Separar Alertas y agregar contexto (class MailEngine o algo así?)
+- [ ] Homogeneizar/Simplificar la representación de cada objeto en __repr__
 - [x] Documentar Instalación
 - [ ] Documentar Configuración
+- [ ] Configurar mediante YAML
 - [x] Agregar DB Backend (sqlalchemy?)
-- [ ] db: Registrar el nombre de la impresora en la Impresion?
+- [x] db: Registrar el nombre de la impresora en la Impresion?
+- [ ] db: Utilizar polymorf para no tener que mapear a mano las propiedades de cups.job a db.job?
