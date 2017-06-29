@@ -9,6 +9,7 @@ Base = declarative_base()
 from cupsAccounting.database.responsable import Responsable
 from cupsAccounting.database.usuario import Usuario
 from cupsAccounting.database.impresion import Impresion
+from cupsAccounting.database.impresora import Impresora
 
 from cupsAccounting.utils import objetoBase
 from cupsAccounting.logger import Logger
@@ -60,6 +61,21 @@ class Database(objetoBase, Logger):
                 print(e)
                 self.session.rollback()
 
+    def getImpresora(self, i_name):
+        i = self.session.query(Impresora).filter_by(name=i_name).first()
+        if i:
+            return i
+        else:
+            i = Impresora(name=i_name)
+            self.session.add(i)
+            try:
+                self.session.commit()
+                return i
+            except Exception as e:
+                print(e)
+                self.session.rollback()
+
+
     def setUsuarioResponsable(self, u_name, r_name):
         usuario = self.getUsuario(u_name)
         responsable = self.getResponsable(r_name)
@@ -79,6 +95,7 @@ class Database(objetoBase, Logger):
 
     def job2db(self, job):
         usuario = self.getUsuario(job.usuario)
+        impresora = self.getImpresora(job.impresora)
         i = Impresion()
         i.name = job.nombre
         i.usuario = usuario
@@ -86,6 +103,7 @@ class Database(objetoBase, Logger):
         i.paginas = job.paginas
         i.responsable = self.session.query(Responsable).\
             filter_by(uid=usuario.responsable_uid).first()
+        i.impresora = impresora
         self.session.add(i)
         try:
             self.session.commit()
