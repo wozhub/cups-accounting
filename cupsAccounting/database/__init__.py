@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from sqlalchemy import create_engine
+from sqlalchemy import desc
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -111,5 +112,7 @@ class Database(objetoBase, Logger):
             self.session.rollback()
 
     def status(self):
-        for i in self.session.query(Impresion).limit(5).all():
+        for i in self.session.query(Impresion)\
+                .order_by(desc(Impresion.iid))\
+                .limit(5).all():
             print(i)
