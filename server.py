@@ -12,19 +12,16 @@ from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
 def main():
     parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
-    parser.add_argument("--nombre", default='test',
-                        help='Nombre de la impresora a administrar en CUPS.')
-    parser.add_argument("--marca", default='generica',
-                        help='Nombre de la impresora a administrar en CUPS.')
-    parser.add_argument("--modelo", default='generico',
-                        help='Nombre de la impresora a administrar en CUPS.')
-    parser.add_argument("--ip", default='127.0.0.1',
-                        help='Nombre de la impresora a administrar en CUPS.')
+    parser.add_argument("--manager", "-m",
+                        default="config.manager.yaml",
+                        help="Archivo de configuración general")
+    parser.add_argument("--printer", "-p",
+                        default="config.printer.yaml",
+                        help="Archivo de configuración de la impresora")
     args = parser.parse_args()
 
-    c = Config('config.yaml')  # Configuracion
-    p = loadPrinter(args)
-    m = Manager(c, p)
+    p = loadPrinter(Config(args.printer))
+    m = Manager(Config(args.manager), p)
 
     while True:
         system('clear')

@@ -30,7 +30,6 @@ def validarUsuario(user):
 
     return -1
 
-
 def enviarMail(to, subject, conf_mail, body=False, attachment=None):
     # http://stackoverflow.com/questions/7437455/python-smtplib-using-gmail-messages-with-a-body-longer-than-about-35-characters
 
