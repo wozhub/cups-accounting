@@ -24,18 +24,19 @@ def main():
     m = Manager(Config(args.manager), p)
 
     while True:
-        system('clear')
-        print(m.status())
-        sleep(1)
         m.procesarEntrada()
+
         system('clear')
         print(m.status())
-        sleep(1)
-        m.procesarSalida()
-
         m.db.status()
         sleep(1)
 
+        m.procesarSalida()
+
+        system('clear')
+        print(m.status())
+        m.db.status()
+        sleep(1)
 
 if __name__ == '__main__':
     main()
