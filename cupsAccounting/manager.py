@@ -78,4 +78,4 @@ class Manager(objetoBase, Logger):
             q_brief += "\t%s\n" % self.q[key].status()
 
         return """{clase} {name}:\n{q_brief}""".format(
-            clase=self.__class__.__name__, name=self.name, q_brief=q_brief)
+            clase=self.__class__.__name__, name=self.p.nombre, q_brief=q_brief)
