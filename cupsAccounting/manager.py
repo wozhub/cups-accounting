@@ -14,7 +14,6 @@ class Manager(objetoBase, Logger):
 
     def __init__(self, config, printer):
         self.config = config
-        # self.name =
         self.c = Connection()
         self.p = printer
         self.m = config.config.mail
@@ -24,9 +23,9 @@ class Manager(objetoBase, Logger):
     def _initQueues(self):
         self.q = {}
 
-        self.q['entrada'] = Queue(self.c, '%s-entrada' % self.name)
-        self.q['espera'] = Queue(self.c, '%s-espera' % self.name)
-        self.q['salida'] = Queue(self.c, '%s-salida' % self.name)
+        self.q['entrada'] = Queue(self.c, '%s-entrada' % self.p.nombre)
+        self.q['espera'] = Queue(self.c, '%s-espera' % self.p.nombre)
+        self.q['salida'] = Queue(self.c, '%s-salida' % self.p.nombre)
 
     def procesarEntrada(self):
         self.logger.debug('Procesando %s' % self.q['entrada'].name)
