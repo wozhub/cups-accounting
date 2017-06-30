@@ -30,16 +30,17 @@ def validarUsuario(user):
 
     return -1
 
-def enviarMail(to, subject, conf_mail, body=False, attachment=None):
+
+def enviarMail(to, subject, c, body=False, attachment=None):
     # http://stackoverflow.com/questions/7437455/python-smtplib-using-gmail-messages-with-a-body-longer-than-about-35-characters
 
     # algunos usuarios no reciben notificaciones porque no tienen mail
     usuario = to.lower().split('@')[0]
-    if usuario in conf_mail['excluidos']:
+    if usuario in c.config.mail['excluidos']:
         return
 
-    if usuario in conf_mail['aliases'].keys():
-        to = conf_mail['aliases'][usuario]
+    if usuario in c.config.mail['aliases'].keys():
+        to = c.config.mail['aliases'][usuario]
 
     contenido = subject
     if body is not False:
@@ -64,6 +65,6 @@ def enviarMail(to, subject, conf_mail, body=False, attachment=None):
     mailServer.ehlo()
     mailServer.starttls()
     mailServer.ehlo()
-    mailServer.login(conf_mail['smtp_user'], conf_mail['smtp_pass'])
+    mailServer.login(c.config.mail['smtp_user'], c.config.mail['smtp_pass'])
     mailServer.sendmail(usuario, to, msg.as_string())
     mailServer.close()

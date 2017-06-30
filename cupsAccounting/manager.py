@@ -33,12 +33,12 @@ class Manager(objetoBase, Logger):
             if j.validar():
                 j.mover(self.q['espera'])
                 subject = "Impresion Recibida: %s" % j.nombre
-                enviarMail(j.usuario+'@agro.uba.ar', subject, self.m)
+                enviarMail(j.usuario+'@agro.uba.ar', subject, self.config)
             else:
                 j.cancelar()
                 subject = "Impresion Cancelada: %s" % j.nombre
                 for admin in self.m['admins']:
-                    enviarMail(admin, subject, self.m)
+                    enviarMail(admin, subject, self.config)
 
     def procesarSalida(self):
         self.logger.debug('Procesando %s' % self.q['espera'].name)
@@ -55,7 +55,7 @@ class Manager(objetoBase, Logger):
             antes = self.p.contador
             j.mover(self.q['salida'])
             subject = "Impresion Iniciando: %s" % j.nombre
-            enviarMail(j.usuario+'@agro.uba.ar', subject, self.m)
+            enviarMail(j.usuario+'@agro.uba.ar', subject, self.config)
 
             sleep(1)  # Hago una pausa para permitir que arranque la impresora
             while not self.p.idle:
@@ -65,7 +65,7 @@ class Manager(objetoBase, Logger):
             self.logger.warn('%d' % j.paginas)
 
             subject = "Impresion Finalizada: %s" % j.nombre
-            enviarMail(j.usuario+'@agro.uba.ar', subject, self.m)
+            enviarMail(j.usuario+'@agro.uba.ar', subject, self.config)
             self.db.job2db(j)
 
             if not self.q['salida'].empty:
