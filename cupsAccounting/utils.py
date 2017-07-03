@@ -39,7 +39,7 @@ def enviarMail(to, subject, c, body=False, attachment=None):
     if usuario in c.config.mail['excluidos']:
         return
 
-    if usuario in c.config.mail['aliases'].keys():
+    if usuario in c.config.mail['aliases']:
         to = c.config.mail['aliases'][usuario]
 
     contenido = subject
