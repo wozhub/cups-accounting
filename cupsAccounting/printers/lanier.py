@@ -13,7 +13,19 @@ class LanierMp3352(Printer):
         self.nombre = c.config.nombre
         self.ip = c.config.ip
         self.oid_estado = "iso.3.6.1.2.1.43.17.6.1.2.1.3"
-        self.oid_contador = 'iso.3.6.1.2.1.43.10.2.1.4.1.1'
+        self.oid_contador = "iso.3.6.1.2.1.43.10.2.1.4.1.1"
+
+        # Alerta cuando mandaron a imprimir en otro formato.
+        # No se si en ese momento puedo cancelar el trabajo
+        self.oid_alerta_papel = "iso.3.6.1.2.1.43.18.1.1.8.1.27"
+
+        # Alerta cuando se queda sin papel
+        self.oid_bandejas = [
+            "iso.36.1.2.1.43.18.1.1.8.1.22",   # tray 1
+            "iso.36.1.2.1.43.18.1.1.8.1.23",   # tray 2
+            "iso.36.1.2.1.43.18.1.1.8.1.24",   # tray 3
+            "iso.36.1.2.1.43.18.1.1.8.1.31"    # tray 4
+        ]
         # oid_contador = 'iso.3.6.1.2.1.43.10.2.1.5.1.1'
 
     def _getSnmpValue(self, oid):

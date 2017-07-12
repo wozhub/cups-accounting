@@ -24,6 +24,8 @@ class Job(objetoBase, Logger):
         if 'smbprn' in self.nombre:
             self.nombre = self.nombre.split(' ', 1)[1]
 
+        # también hay que extraer el 'remote downlevel document'
+
     @property
     def attr(self):
         if self._attr is None:
