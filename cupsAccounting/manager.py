@@ -9,6 +9,8 @@ from cupsAccounting.database import Database
 from cups import Connection
 from time import sleep
 
+from IPython import embed
+
 
 class Manager(objetoBase, Logger):
 
@@ -33,7 +35,7 @@ class Manager(objetoBase, Logger):
             if j.validar():
                 j.mover(self.q['espera'])
                 subject = "Impresion Recibida: %s" % j.nombre
-                enviarMail(j.usuario+'@agro.uba.ar', subject, self.config)
+                enviarMail(j.usuario, subject, self.config)
             else:
                 j.cancelar()
                 subject = "Impresion Cancelada: %s" % j.nombre

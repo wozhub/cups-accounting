@@ -31,7 +31,7 @@ class Impresion(Base):
 
     def __repr__(self):
         #return "Impresion (%d): %s" % (self.iid or -1, self.name)
-        return """<{clase} {jid}: {user}@{ip} "{nombre}" {impresora}@{fecha}>""".format(
-            clase=self.__class__.__name__,
-            jid=self.iid or -1, user=self.usuario, ip=self.ip,
-            nombre=self.nombre, impresora=self.impresora, fecha=self.fecha)
+        return """{fecha} {clase}:{jid} {user} {paginas} "{nombre}" """.format(
+            clase=self.__class__.__name__, paginas=self.paginas,
+            jid=self.iid or -1, user=self.usuario,
+            nombre=self.nombre, fecha=self.fecha)

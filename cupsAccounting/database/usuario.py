@@ -22,4 +22,4 @@ class Usuario(Base):
     impresiones = relationship("Impresion", back_populates='usuario')
 
     def __repr__(self):
-        return "Usuario (%d): %s" % (self.uid or -1, self.name)
+        return "Usuario:%d %s" % (self.uid or -1, self.name)

@@ -1,4 +1,4 @@
-nombre: fotocopiadora
-marca: lanier
-modelo: LanierMp3352
+nombre: test
+marca: test
+modelo: Printer
 ip: 127.0.0.1

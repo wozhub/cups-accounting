@@ -17,3 +17,7 @@ class Printer(objetoBase, Logger):
     def contador(self):
         self._contador += randint(1, 20)
         return self._contador
+
+    @property
+    def idle(self):
+        return True

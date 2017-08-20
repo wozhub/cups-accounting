@@ -1,13 +1,14 @@
 mail:
-    dominio: "@piruloinc.com"
+    dominio: "piruloinc.com"
     excluidos: 
         - salon
     aliases:
-        - eljefe: "pirulo@piruloinc.com"
+        - eljefe: "pirulo"
     admins:
         - mcgyver
     smtp_user: "usuario@gmail.com"
-    smpt_pass: clave
+    smtp_pass: clave
+
 
 db:
     db_url: sqlite://

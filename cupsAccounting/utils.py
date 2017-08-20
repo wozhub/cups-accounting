@@ -35,7 +35,14 @@ def enviarMail(to, subject, c, body=False, attachment=None):
     # http://stackoverflow.com/questions/7437455/python-smtplib-using-gmail-messages-with-a-body-longer-than-about-35-characters
 
     # algunos usuarios no reciben notificaciones porque no tienen mail
-    usuario = to.lower().split('@')[0]
+
+    to = to.lower()
+    if "@" in to:
+        usuario, dominio = to.split('@')
+    else:
+        usuario = to
+        dominio = c.config.mail['dominio']
+
     if usuario in c.config.mail['excluidos']:
         return
 
@@ -66,5 +73,5 @@ def enviarMail(to, subject, c, body=False, attachment=None):
     mailServer.starttls()
     mailServer.ehlo()
     mailServer.login(c.config.mail['smtp_user'], c.config.mail['smtp_pass'])
-    mailServer.sendmail(usuario, to, msg.as_string())
+    mailServer.sendmail(usuario, "%s@%s" % (usuario, dominio), msg.as_string())
     mailServer.close()
