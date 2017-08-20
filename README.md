@@ -39,6 +39,7 @@ https://www.papercut.com/kb/Main/UnknownAndWithheldUserInCUPS
 - [x] Agregar Alertas (jinja y google-smtp?)
 - [ ] Alertas: Separar en un objeto aparte y agregar contexto (class MailEngine o algo así?)
 - [ ] Alertas: Briefing del job en cuestión
+- [x] Alertas: Dominio libre en los aliases
 - [ ] Homogeneizar/Simplificar la representación de cada objeto en __repr__
 - [x] Documentación: Instalación
 - [ ] Documentación: Configuración
@@ -50,3 +51,5 @@ https://www.papercut.com/kb/Main/UnknownAndWithheldUserInCUPS
 - [x] db: Agregar DB Backend (sqlalchemy)
 - [x] db: Registrar el nombre de la impresora en la Impresion?
 - [ ] db: Utilizar polymorf para no tener que mapear a mano las propiedades de cups.job a db.job?
+- [ ] db: Armar un front-end con las estadisticas por grupo/usuario
+- [ ] db: Tabla separada con las maquinas para no escribir una y otra vez el source ip
