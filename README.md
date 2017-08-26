@@ -38,6 +38,7 @@ https://www.papercut.com/kb/Main/UnknownAndWithheldUserInCUPS
 - [x] Funcionamiento Básico (etapas de la impresión y autenticación)
 - [x] Agregar Alertas (jinja y google-smtp?)
 - [ ] Alertas: Separar en un objeto aparte y agregar contexto (class MailEngine o algo así?)
+- [ ] Alertas: Armar un Queue aparte para enviar mails sin bloquear al proceso de impresión
 - [ ] Alertas: Briefing del job en cuestión
 - [x] Alertas: Dominio libre en los aliases
 - [ ] Homogeneizar/Simplificar la representación de cada objeto en __repr__
