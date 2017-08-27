@@ -9,7 +9,7 @@ def loadPrinter(c):
         print("Buscando %s.%s" % (c.config.marca, c.config.modelo))
         m = __import__('cupsAccounting.printers.%s' % c.config.marca,
                        fromlist=[c.config.modelo, ])
-        p = getattr(m, c.config.modelo)(c, c.config.nombre)
+        p = getattr(m, c.config.modelo)(c, nombre=c.config.nombre)
         print(p)
         return p
     except Exception as e:
