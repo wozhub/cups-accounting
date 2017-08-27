@@ -52,9 +52,8 @@ class Mailer(objetoBase, Logger):
                 "%s@%s" % (correo['usuario'], correo['dominio']),
                 msg.as_string())
             mailServer.close()
-        except Exception as e:
-            self.logger.error("No pude enviar el mail: %s" % e)
-
+        except Exception as err:
+            self.logger.error("No pude enviar el mail: %s" % err)
 
     def notificar(self, j, tipo):
 
