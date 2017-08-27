@@ -16,9 +16,12 @@ class Printer(objetoBase, Logger):
     @property
     def contador(self):
         self._contador += randint(1, 20)
-        self.logger.info("El contador está en: ", self._contador)
+        self.logger.info("El contador está en: %d" % self._contador)
         return self._contador
 
     @property
     def idle(self):
         return True
+
+    def __repr__(self):
+        return "%s.%s" % (self.marca, self.nombre)
