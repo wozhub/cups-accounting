@@ -55,5 +55,5 @@ class LanierMp3352(Printer):
     @property
     def contador(self):
         self._contador = int(self._getSnmpValue(self.oid_contador))
-        self.logger.info("El contador está en: ", self._contador)
+        self.logger.info("El contador está en: %d " % self._contador)
         return self._contador
