@@ -10,6 +10,8 @@ class LanierMp3352(Printer):
     marca = 'lanier'
 
     def __init__(self, c):  # Se inicializa con un Config
+        self.logger.debug("Inicializando Impresora: ", c.config.nombre)
+
         self.nombre = c.config.nombre
         self.ip = c.config.ip
         self.oid_estado = "iso.3.6.1.2.1.43.17.6.1.2.1.3"
@@ -30,7 +32,9 @@ class LanierMp3352(Printer):
 
     def _getSnmpValue(self, oid):
         session = Session(hostname=self.ip, community='public', version=2)
-        return session.get(oid).value
+        value = session.get(oid).value
+        self.logger.debug("%s: %s" % (oid, value))
+        return value
 
     @property
     def estado(self):
@@ -50,4 +54,6 @@ class LanierMp3352(Printer):
 
     @property
     def contador(self):
-        return int(self._getSnmpValue(self.oid_contador))
+        self._contador = int(self._getSnmpValue(self.oid_contador))
+        self.logger.info("El contador está en: ", self._contador)
+        return self._contador
