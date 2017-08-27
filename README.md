@@ -37,8 +37,8 @@ https://www.papercut.com/kb/Main/UnknownAndWithheldUserInCUPS
 
 - [x] Funcionamiento Básico (etapas de la impresión y autenticación)
 - [x] Agregar Alertas (jinja y google-smtp?)
-- [ ] Alertas: Separar en un objeto aparte y agregar contexto (class MailEngine o algo así?)
-- [ ] Alertas: Armar un Queue aparte para enviar mails sin bloquear al proceso de impresión
+- [x] Alertas: Separar en un objeto aparte y agregar contexto (class MailEngine o algo así?)
+- [x] Alertas: Armar un Queue aparte para enviar mails sin bloquear al proceso de impresión
 - [ ] Alertas: Briefing del job en cuestión
 - [x] Alertas: Dominio libre en los aliases
 - [ ] Homogeneizar/Simplificar la representación de cada objeto en __repr__
@@ -49,6 +49,7 @@ https://www.papercut.com/kb/Main/UnknownAndWithheldUserInCUPS
 - [x] Configuración: Utilizar YAML en lugar de un script de python
 - [x] Configuración: Separar la config del Manager de la impresora (mismo manager puede admin varias impr)
 - [x] Ejecución: Parametrizar impresora
+- [ ] Ejecución: Manejar FD de salida y niveles de LOG
 - [x] db: Agregar DB Backend (sqlalchemy)
 - [x] db: Registrar el nombre de la impresora en la Impresion?
 - [ ] db: Utilizar polymorf para no tener que mapear a mano las propiedades de cups.job a db.job?

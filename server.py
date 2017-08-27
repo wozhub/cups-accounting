@@ -25,18 +25,17 @@ def main():
 
     while True:
         m.procesarEntrada()
-
-        system('clear')
-        print(m.status())
-        m.db.status()
         sleep(1)
 
+        # print(m.status())
+        # m.db.status()
         m.procesarSalida()
-
-        system('clear')
-        print(m.status())
-        m.db.status()
         sleep(1)
+
+        # system('clear')
+        # print(m.status())
+        # m.db.status()
+
 
 if __name__ == '__main__':
     main()

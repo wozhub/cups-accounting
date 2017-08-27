@@ -7,7 +7,7 @@ from re import search
 
 
 class Job(objetoBase, Logger):
-    paginas = 1  # Por el solo hecho de existir
+    paginas = -1  # Por el solo hecho de existir
     _attr = None
 
     def __init__(self, c, jid):
@@ -55,6 +55,12 @@ class Job(objetoBase, Logger):
         self.logger.info(
             '%d: Cancelando! (%s)' % (self.jid, self))
         self.c.cancelJob(self.jid)
+
+    def mail_repr(self):
+        r = ""
+        for key in self.attr.keys():
+            r += "\n%s: %s" % (key, self.attr[key])
+        return r
 
     def __repr__(self):
         return """{clase} {jid}: {user}@{ip} "{nombre}"@{impresora} """.format(

@@ -2,9 +2,11 @@
 
 from cupsAccounting.queue import Queue
 from cupsAccounting.logger import Logger
-from cupsAccounting.utils import objetoBase, enviarMail
+
+from cupsAccounting.utils import objetoBase
 
 from cupsAccounting.database import Database
+from cupsAccounting.mailer import Mailer
 
 from cups import Connection
 from time import sleep
@@ -18,7 +20,7 @@ class Manager(objetoBase, Logger):
         self.config = config
         self.c = Connection()
         self.p = printer
-        self.m = config.config.mail
+        self.mailer = Mailer(config.config.mail)
         self.db = Database(config.config.db['db_url'])
         self._initQueues()
 
@@ -34,13 +36,10 @@ class Manager(objetoBase, Logger):
         for j in self.q['entrada'].jobs:
             if j.validar():
                 j.mover(self.q['espera'])
-                subject = "Impresion Recibida: %s" % j.nombre
-                enviarMail(j.usuario, subject, self.config)
+                self.mailer.notificar(j, "received")
             else:
                 j.cancelar()
-                subject = "Impresion Cancelada: %s" % j.nombre
-                for admin in self.m['admins']:
-                    enviarMail(admin, subject, self.config)
+                self.mailer.notificar(j, "cancelled")
 
     def procesarSalida(self):
         self.logger.debug('Procesando %s' % self.q['espera'].name)
@@ -56,18 +55,16 @@ class Manager(objetoBase, Logger):
 
             antes = self.p.contador
             j.mover(self.q['salida'])
-            subject = "Impresion Iniciando: %s" % j.nombre
-            enviarMail(j.usuario+'@agro.uba.ar', subject, self.config)
+            self.mailer.notificar(j, "started")
 
             sleep(1)  # Hago una pausa para permitir que arranque la impresora
             while not self.p.idle:
+                print(j.attr['job-media-progress'])
                 sleep(1)  # Espero a que termine
 
             j.paginas = self.p.contador - antes
             self.logger.warn('%d' % j.paginas)
-
-            subject = "Impresion Finalizada: %s" % j.nombre
-            enviarMail(j.usuario+'@agro.uba.ar', subject, self.config)
+            self.mailer.notificar(j, "ended")
             self.db.job2db(j)
 
             if not self.q['salida'].empty:

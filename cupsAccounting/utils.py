@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-from cupsAccounting.logger import Logger
-
 from pwd import getpwnam
 
 from smtplib import SMTP
@@ -14,13 +12,17 @@ from os.path import basename
 u_black = ['Administrador', 'administrador', 'root', 'admin']
 u_white = ['marie']
 
+
 class objetoBase(object):
     pass
 
+
 def validarUsuario(user):
     """Verifica que el usuario exista en LDAP"""
-    if user in u_black: return 1
-    if user in u_white: return 0
+    if user in u_black:
+        return 1
+    if user in u_white:
+        return 0
 
     try:
         getpwnam(user)
@@ -31,47 +33,32 @@ def validarUsuario(user):
     return -1
 
 
-def enviarMail(to, subject, c, body=False, attachment=None):
-    # http://stackoverflow.com/questions/7437455/python-smtplib-using-gmail-messages-with-a-body-longer-than-about-35-characters
-
-    # algunos usuarios no reciben notificaciones porque no tienen mail
-
-    to = to.lower()
-    if "@" in to:
-        usuario, dominio = to.split('@')
-    else:
-        usuario = to
-        dominio = c.config.mail['dominio']
-
-    if usuario in c.config.mail['excluidos']:
-        return
-
-    if usuario in c.config.mail['aliases']:
-        to = c.config.mail['aliases'][usuario]
-
-    contenido = subject
-    if body is not False:
-        contenido = body.encode('ascii', 'ignore')
+def enviarCorreo(correo):
 
     msg = MIMEMultipart()
+    msg['From'] = correo['usuario']
+    msg['To'] = correo['to']
+    msg['Subject'] = correo['subject']
+    msg.attach(MIMEText(correo['contenido'], 'html'))
 
-    msg['From'] = usuario
-    msg['To'] = to
-    msg['Subject'] = subject
-    msg.attach(MIMEText(contenido, 'html'))
-
-    if attachment is not None:
+    if "attachment" in correo:
         part = MIMEBase('application', 'octet-stream')
-        part.set_payload(open(attachment, 'rb').read())
+        part.set_payload(open(correo['attachment'], 'rb').read())
         encode_base64(part)
         part.add_header('Content-Disposition',
-                        'attachment; filename="%s"' % basename(attachment))
+                        'attachment; filename="%s"' %
+                        basename(correo['attachment']))
         msg.attach(part)
 
-    mailServer = SMTP("smtp.gmail.com", 587)
+    mailServer = SMTP(correo['config']['smtp_serv'],
+                      correo['config']['smtp_port'])
     mailServer.ehlo()
     mailServer.starttls()
     mailServer.ehlo()
-    mailServer.login(c.config.mail['smtp_user'], c.config.mail['smtp_pass'])
-    mailServer.sendmail(usuario, "%s@%s" % (usuario, dominio), msg.as_string())
+    mailServer.login(correo['config']['smtp_user'],
+                     correo['config']['smtp_pass'])
+    mailServer.sendmail(
+        correo['usuario'],
+        "%s@%s" % (correo['usuario'], correo['dominio']),
+        msg.as_string())
     mailServer.close()
