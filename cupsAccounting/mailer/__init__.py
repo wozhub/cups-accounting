@@ -26,7 +26,9 @@ class Mailer(objetoBase, Logger):
         msg['From'] = correo['usuario']
         msg['To'] = correo['to']
         msg['Subject'] = correo['subject']
-        msg.attach(MIMEText(correo['contenido'], 'html'))
+
+        if "contenido" in correo:
+            msg.attach(MIMEText(correo['contenido'], 'html'))
 
         if "attachment" in correo:
             part = MIMEBase('application', 'octet-stream')
