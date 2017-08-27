@@ -37,16 +37,22 @@ class Mailer(objetoBase, Logger):
                             basename(correo['attachment']))
             msg.attach(part)
 
-        mailServer = SMTP(self.config['smtp_serv'], self.config['smtp_port'])
-        mailServer.ehlo()
-        mailServer.starttls()
-        mailServer.ehlo()
-        mailServer.login(self.config['smtp_user'], self.config['smtp_pass'])
-        mailServer.sendmail(
-            correo['usuario'],
-            "%s@%s" % (correo['usuario'], correo['dominio']),
-            msg.as_string())
-        mailServer.close()
+        try:
+            mailServer = SMTP(self.config['smtp_serv'],
+                              self.config['smtp_port'])
+            mailServer.ehlo()
+            mailServer.starttls()
+            mailServer.ehlo()
+            mailServer.login(self.config['smtp_user'],
+                             self.config['smtp_pass'])
+            mailServer.sendmail(
+                correo['usuario'],
+                "%s@%s" % (correo['usuario'], correo['dominio']),
+                msg.as_string())
+            mailServer.close()
+        except Exception as e:
+            self.logger.error("No pude enviar el mail: %s" % e)
+
 
     def notificar(self, j, tipo):
 
@@ -81,12 +87,7 @@ class Mailer(objetoBase, Logger):
         # correo['contenido'] = j.mail_repr()
         # correo['contenido'] = mail['subject']
 
-        try:
-            self._enviarCorreo(correo)
-        except:
-            self.logger.error('No pude enviar un correo')
-        finally:
-            pass
+        self._enviarCorreo(correo)
 
     # for admin in self.m['admins']:
         # enviarMail(admin, subject, self.config)

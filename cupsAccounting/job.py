@@ -11,7 +11,7 @@ class Job(objetoBase, Logger):
     _attr = None
 
     def __init__(self, c, jid):
-        self.logger.info("Nuevo Job [%d]" % jid)
+        self.logger.debug("Nuevo Job [%d]" % jid)
         self.jid = jid
         self.c = c  # referencia al servidor
 
