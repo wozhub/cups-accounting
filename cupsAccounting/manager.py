@@ -21,7 +21,7 @@ class Manager(objetoBase, Logger):
         self.c = Connection()
         self.p = printer
         self.mailer = Mailer(config.config.mail)
-        self.db = Database(config.config.db['db_url'])
+        self.db = Database(config.config.db)
         self._initQueues()
 
     def _initQueues(self):

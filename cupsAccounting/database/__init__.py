@@ -20,9 +20,9 @@ class Database(objetoBase, Logger):
     _session = None
     base = Base
 
-    def __init__(self, engine_url):
-        self.logger.info("Creando %s" % (engine_url))
-        self.engine = create_engine(engine_url)
+    def __init__(self, config):
+        self.logger.info("Creando %s" % (config['db_url']))
+        self.engine = create_engine(config['db_url'])
         self.base.metadata.create_all(self.engine)
 
     @property
