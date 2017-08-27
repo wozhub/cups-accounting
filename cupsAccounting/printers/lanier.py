@@ -9,7 +9,7 @@ from easysnmp import Session
 class LanierMp3352(Printer):
     marca = 'lanier'
 
-    def __init__(self, c):  # Se inicializa con un Config
+    def __init__(self, c, nombre="lanier"):  # Se inicializa con un Config
         self.logger.debug("Inicializando Impresora: ", c.config.nombre)
 
         self.nombre = c.config.nombre
