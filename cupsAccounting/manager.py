@@ -59,16 +59,18 @@ class Manager(objetoBase, Logger):
 
             sleep(1)  # Hago una pausa para permitir que arranque la impresora
             while not self.p.idle:
-                print(j.attr['job-media-progress'])
+                self.logger.debug(
+                    "%s: %d" % (j.nombre, j.attr['job-media-progress']))
                 sleep(1)  # Espero a que termine
 
             j.paginas = self.p.contador - antes
-            self.logger.warn('%d' % j.paginas)
+            self.logger.warn(
+                "%s: %d" % (j.nombre, j.paginas))
             self.mailer.notificar(j, "ended")
             self.db.job2db(j)
 
             if not self.q['salida'].empty:
-                self.logger.info('Paso algo raro')
+                self.logger.warn('Paso algo raro...')
                 break
 
     def status(self):
