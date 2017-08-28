@@ -12,7 +12,7 @@ def loadPrinter(c):
         p = getattr(m, c.config.modelo)(c, nombre=c.config.nombre)
     except Exception as e:
         print(e)
-        p = Printer(c.config.nombre)
+        p = Printer(c, nombre=c.config.nombre)
 
     finally:
         print(p)

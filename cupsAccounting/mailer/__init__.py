@@ -40,13 +40,13 @@ class Mailer(objetoBase, Logger):
             msg.attach(part)
 
         try:
-            mailServer = SMTP(self.config['smtp_serv'],
-                              self.config['smtp_port'])
+            mailServer = SMTP(self.config['smtp_config']['smtp_serv'],
+                              self.config['smtp_config']['smtp_port'])
             mailServer.ehlo()
             mailServer.starttls()
             mailServer.ehlo()
-            mailServer.login(self.config['smtp_user'],
-                             self.config['smtp_pass'])
+            mailServer.login(self.config['smtp_config']['smtp_user'],
+                             self.config['smtp_config']['smtp_pass'])
             mailServer.sendmail(
                 correo['usuario'],
                 "%s@%s" % (correo['usuario'], correo['dominio']),
@@ -54,6 +54,7 @@ class Mailer(objetoBase, Logger):
             mailServer.close()
         except Exception as err:
             self.logger.error("No pude enviar el mail: %s" % err)
+            self.logger.error(self.config)
 
     def notificar(self, j, tipo):
 
