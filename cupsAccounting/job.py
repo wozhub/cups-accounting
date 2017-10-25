@@ -20,7 +20,7 @@ class Job(objetoBase, Logger):
 
         # Manejo ALIAS por caso Gundel
         # gundel_agro.uba.ar: El usuario no pudo verificarse
-        if self.usuario in config['aliases'].keys:
+        if self.usuario in config['aliases'].keys():
             alias = config['aliases'][self.usuario]
             self.logger.info("%s: Es un alias de %s" % (self.usuario, alias))
             self.usuario = alias
