@@ -7,7 +7,8 @@ from cupsAccounting.logger import Logger
 
 class Queue(objetoBase, Logger):
 
-    def __init__(self, c, name):
+    def __init__(self, c, name, config):
+        self.config = config
         self.c = c
         self.name = name
         self.uri = self.attr['printer-uri-supported'][0]
@@ -21,7 +22,7 @@ class Queue(objetoBase, Logger):
         jobs = []
         for jid in self.c.getJobs().keys():
             if self.c.getJobAttributes(jid)['job-printer-uri'] == self.uri:
-                jobs.append(Job(self.c, jid))
+                jobs.append(Job(self.c, jid, self.config))
         return jobs
 
     @property

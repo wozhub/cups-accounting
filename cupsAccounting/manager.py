@@ -11,7 +11,7 @@ from cupsAccounting.mailer import Mailer
 from cups import Connection
 from time import sleep
 
-from IPython import embed
+#from IPython import embed
 
 
 class Manager(objetoBase, Logger):
@@ -27,9 +27,12 @@ class Manager(objetoBase, Logger):
     def _initQueues(self):
         self.q = {}
 
-        self.q['entrada'] = Queue(self.c, '%s-entrada' % self.p.nombre)
-        self.q['espera'] = Queue(self.c, '%s-espera' % self.p.nombre)
-        self.q['salida'] = Queue(self.c, '%s-salida' % self.p.nombre)
+        self.q['entrada'] = Queue(self.c, '%s-entrada' % self.p.nombre,
+                                  self.config.config.user)
+        self.q['espera'] = Queue(self.c, '%s-espera' % self.p.nombre,
+                                 self.config.config.user)
+        self.q['salida'] = Queue(self.c, '%s-salida' % self.p.nombre,
+                                 self.config.config.user)
 
     def procesarEntrada(self):
         self.logger.debug('Procesando %s' % self.q['entrada'].name)

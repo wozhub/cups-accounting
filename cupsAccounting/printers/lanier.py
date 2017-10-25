@@ -38,6 +38,8 @@ class LanierMp3352(Printer):
 
     @property
     def estado(self):
+        # TODO: Chequeo que responda pings
+        # TODO: Chequeo que responda snmp
         return self._getSnmpValue(self.oid_estado)
 
     @property

@@ -10,12 +10,21 @@ class Job(objetoBase, Logger):
     paginas = -1  # Por el solo hecho de existir
     _attr = None
 
-    def __init__(self, c, jid):
+    def __init__(self, c, jid, config):
+        self.config = config
         self.logger.debug("Nuevo Job [%d]" % jid)
         self.jid = jid
         self.c = c  # referencia al servidor
 
         self.usuario = self.attr['job-originating-user-name'].lower()
+
+        # Manejo ALIAS por caso Gundel
+        # gundel_agro.uba.ar: El usuario no pudo verificarse
+        if self.usuario in config['aliases'].keys:
+            alias = config['aliases'][self.usuario]
+            self.logger.info("%s: Es un alias de %s" % (self.usuario, alias)
+            self.usuario = alias
+
         self.ip = self.attr['job-originating-host-name']
 
         self.impresora = search('printers/(.*)-',
