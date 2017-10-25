@@ -22,7 +22,7 @@ class Job(objetoBase, Logger):
         # gundel_agro.uba.ar: El usuario no pudo verificarse
         if self.usuario in config['aliases'].keys:
             alias = config['aliases'][self.usuario]
-            self.logger.info("%s: Es un alias de %s" % (self.usuario, alias)
+            self.logger.info("%s: Es un alias de %s" % (self.usuario, alias))
             self.usuario = alias
 
         self.ip = self.attr['job-originating-host-name']
