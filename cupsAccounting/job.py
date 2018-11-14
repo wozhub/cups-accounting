@@ -21,7 +21,7 @@ class Job(objetoBase, Logger):
         # Manejo MicrosoftAccounts por caso Gundel, MVR, etc
         # gundel_agro.uba.ar: El usuario no pudo verificarse
         if "_agro.uba.ar" in self.usuario:
-            self.usuario.replace('_agro.uba.ar', '')
+            self.usuario=self.usuario.replace('_agro.uba.ar', '')
 
         # Algunos usuarios son aliases
         if self.usuario in config['aliases'].keys():
