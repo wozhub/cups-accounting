@@ -23,6 +23,12 @@ class Job(objetoBase, Logger):
         if "_agro.uba.ar" in self.usuario:
             self.usuario=self.usuario.replace('_agro.uba.ar', '')
 
+        # Algo similar en la máquina de agusarquis
+        # agusarquis@agro.uba.ar: El usuario no pudo verificarse
+        if "@agro.uba.ar" in self.usuario:
+            self.usuario=self.usuario.replace('@agro.uba.ar', '')
+
+
         # Algunos usuarios son aliases
         if self.usuario in config['aliases'].keys():
             alias = config['aliases'][self.usuario]
