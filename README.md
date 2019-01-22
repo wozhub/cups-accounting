@@ -55,3 +55,5 @@ https://www.papercut.com/kb/Main/UnknownAndWithheldUserInCUPS
 - [ ] db: Utilizar polymorf para no tener que mapear a mano las propiedades de cups.job a db.job?
 - [ ] db: Armar un front-end con las estadisticas por grupo/usuario
 - [ ] db: Tabla separada con las maquinas para no escribir una y otra vez el source ip
+- [ ] jobs: Reducir la verbosidad de la espera
+- [ ] jobs: Guardar estadisticas de cuanto tiempo estuvo en cada cola?
